@@ -60,14 +60,14 @@ const ComputersCanvas = () => {
       dpr={[1, 2]}
       camera={{ position: [20, 3, 5], fov: 25 }}
       gl={{ preserveDrawingBuffer: true }}
-      style={{ pointerEvents: isMobile ? "none" : "auto" }}
+      style={{ touchAction: "pan-y", pointerEvents: "auto" }}
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
           enableZoom={false}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
-          enableRotate={!isMobile}
+          enableRotate={true}
         />
         <Computers isMobile={isMobile} />
       </Suspense>
