@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Tilt } from "react-tilt";
+import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -7,137 +8,101 @@ import { styles } from "../styles";
 import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
+import { textVariant, fadeIn } from "../utils/motion";
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-const ProjectCard = ({
-  index,
-  name,
-  description,
-  tags,
-  image,
-  source_code_link,
-}) => {
-  const cardRef = useRef(null);
-
-  useEffect(() => {
-    const el = cardRef.current;
-
-    // ScrollTrigger for animating project cards with stagger
-    gsap.fromTo(
-      el,
-      {
-        opacity: 0,
-        y: 100, // Start off-screen
-      },
-      {
-        opacity: 1,
-        y: 0,
-        scrollTrigger: {
-          trigger: el,
-          start: "top bottom",  // Trigger when the top of the element hits the bottom of the viewport
-          end: "top center",    // End when the top reaches the center of the viewport
-          scrub: true,          // Smoothly sync scroll and animation
-          markers: false,       // Set to `true` to see debug markers
-        },
-      }
-    );
-  }, []);
-
+const ProjectCard = ({ index, name, description, tags, image, source_code_link }) => {
   return (
-    <div ref={cardRef}>
+    <motion.div
+      variants={fadeIn("up", "spring", index * 0.15, 0.65)}
+      className="w-full sm:w-[360px]"
+    >
       <Tilt
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
+        options={{ max: 12, scale: 1.02, speed: 450 }}
+        className="w-full"
       >
-        <div className="relative w-full h-[230px]">
-          <img
-            src={image}
-            alt="project_image"
-            className="w-full h-full object-cover object-left rounded-2xl"
-          />
+        <div className="bg-tertiary p-5 rounded-2xl w-full border border-white/5 hover:border-[#915EFF]/30 transition-all duration-300 hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)] group">
+          {/* Image */}
+          <div className="relative w-full h-[220px] overflow-hidden rounded-xl">
+            <img
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover object-left transition-transform duration-500 group-hover:scale-105"
+            />
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-          <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-            <div
-              onClick={() => window.open(source_code_link, "_blank")}
-              className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
-            >
-              <img
-                src={github}
-                alt="source code"
-                className="w-1/2 h-1/2 object-contain"
-              />
+            {/* GitHub button */}
+            <div className="absolute top-3 right-3">
+              <motion.div
+                onClick={() => window.open(source_code_link, "_blank")}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-10 h-10 rounded-full flex justify-center items-center cursor-pointer transition-all duration-300"
+                style={{
+                  background: "rgba(0,0,0,0.6)",
+                  backdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                }}
+              >
+                <img
+                  src={github}
+                  alt="source code"
+                  className="w-5 h-5 object-contain"
+                />
+              </motion.div>
             </div>
           </div>
-        </div>
 
-        <div className="mt-5">
-          <h3 className="text-white font-bold text-[24px]">{name}</h3>
-          <p className="mt-2 text-secondary text-[14px]">{description}</p>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <p
-              key={`${name}-${tag.name}`}
-              className={`text-[14px] ${tag.color}`}
-            >
-              #{tag.name}
+          {/* Content */}
+          <div className="mt-5">
+            <h3 className="text-white font-bold text-[22px] group-hover:text-[#915EFF] transition-colors duration-300">
+              {name}
+            </h3>
+            <p className="mt-2 text-secondary text-[14px] leading-[22px] line-clamp-4">
+              {description}
             </p>
-          ))}
+          </div>
+
+          {/* Tags */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span
+                key={`${name}-${tag.name}`}
+                className="text-[12px] font-medium px-3 py-1 rounded-full text-[#a78bfa] bg-[#915EFF]/10 border border-[#915EFF]/20 hover:bg-[#915EFF]/20 hover:border-[#915EFF]/40 transition-all duration-200"
+              >
+                #{tag.name}
+              </span>
+            ))}
+          </div>
         </div>
       </Tilt>
-    </div>
+    </motion.div>
   );
 };
 
 const Works = () => {
-  useEffect(() => {
-    // Stagger effect for project cards
-    gsap.fromTo(
-      ".project-card", // Select all project cards
-      {
-        opacity: 0,
-        y: 100,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1, // Stagger delay of 0.3 seconds between each card
-        scrollTrigger: {
-          trigger: ".works-container",
-          start: "top bottom",  // Trigger when the top of the container reaches the bottom
-          end: "top center",
-          scrub: true,
-          markers: false, // Set to true to see debug markers
-        },
-      }
-    );
-  }, []);
-
   return (
     <>
-      <div>
-        <p className={`${styles.sectionSubText}`}>My work</p>
-        <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
-      </div>
+      <motion.div variants={textVariant()}>
+        <p className={styles.sectionSubText}>My work</p>
+        <h2 className={styles.sectionHeadText}>Projects.</h2>
+      </motion.div>
 
-      <div className="w-full flex">
-        <p className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]">
-          Following projects showcase my skills and experience through real-world examples of my work. Each project is briefly described with links to code repositories and live demos. It reflects my ability to solve complex problems, work with different technologies, and manage projects effectively.
-        </p>
-      </div>
+      <motion.p
+        variants={fadeIn("", "", 0.1, 1)}
+        className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]"
+      >
+        Following projects showcase my skills and experience through real-world
+        examples. Each project is briefly described with links to code
+        repositories. It reflects my ability to solve complex problems, work
+        with different technologies, and manage projects effectively.
+      </motion.p>
 
-      <div className="works-container mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-5">
+      <div className="mt-20 flex flex-wrap gap-7 justify-center">
         {projects.map((project, index) => (
-          <div key={`project-${index}`} className="project-card">
-            <ProjectCard index={index} {...project} />
-          </div>
+          <ProjectCard key={`project-${index}`} index={index} {...project} />
         ))}
       </div>
     </>
