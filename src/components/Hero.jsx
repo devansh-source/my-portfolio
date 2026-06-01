@@ -37,16 +37,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             className={`${styles.heroHeadText} text-white`}
           >
-            Hi, I&apos;m{" "}
-            <span className="text-[#915EFF] relative">
-              Devansh
-              <motion.span
-                initial={{ width: "100%" }}
-                animate={{ width: "0%" }}
-                transition={{ duration: 0.8, delay: 1.0, ease: "easeInOut" }}
-                className="absolute inset-0 bg-primary"
-              />
-            </span>
+            Hi, I&apos;m <span className="text-[#915EFF]">Devansh</span>
           </motion.h1>
 
           <motion.p
