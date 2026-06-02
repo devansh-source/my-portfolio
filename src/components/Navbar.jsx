@@ -33,56 +33,101 @@ const Navbar = () => {
       <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
         <Link
           to="/"
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-3 group"
           onClick={() => {
             setActive("");
             window.scrollTo(0, 0);
           }}
         >
-          <motion.img
-            src={logo}
-            alt="logo"
-            className="w-9 h-9 object-contain"
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-          />
+          {/* Custom Animated Code Terminal Logo Badge */}
+          <motion.div
+            whileHover="hover"
+            whileTap={{ scale: 0.95 }}
+            className="flex flex-col gap-1.5 px-3.5 py-2 rounded-xl border border-accent/25 bg-[#0f0826]/85 backdrop-blur-md shadow-[0_0_15px_rgb(var(--color-accent-rgb)/0.15)] hover:border-accent/50 hover:shadow-[0_0_25px_rgb(var(--color-accent-rgb)/0.35)] transition-all duration-300 select-none cursor-pointer"
+          >
+            {/* Terminal Title Bar Mac-style Dots */}
+            <div className="flex gap-1.5 items-center justify-start">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ff5f56] shadow-[0_0_4px_rgba(255,95,86,0.5)]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ffbd2e] shadow-[0_0_4px_rgba(255,189,46,0.5)]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#27c93f] shadow-[0_0_4px_rgba(39,201,63,0.5)]" />
+            </div>
+
+            {/* Terminal Coding Line */}
+            <div className="flex items-center gap-0.5 font-mono text-[16px] leading-none">
+              <motion.span 
+                variants={{
+                  hover: { x: -2.5 }
+                }}
+                className="text-accent font-extrabold"
+              >
+                &lt;
+              </motion.span>
+              <span className="text-white font-black tracking-wide">D</span>
+              <motion.span 
+                variants={{
+                  hover: { x: 2.5 }
+                }}
+                className="text-accent font-extrabold"
+              >
+                /&gt;
+              </motion.span>
+              
+              {/* Blinking CLI Cursor */}
+              <motion.span
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+                className="w-1.5 h-3.5 bg-accent ml-1 inline-block align-middle"
+              />
+            </div>
+          </motion.div>
+
           <p className="text-white text-[18px] font-bold cursor-pointer">
             Devansh{" "}
-            <span className="text-[#915EFF] group-hover:text-white transition-colors duration-300">
+            <span className="text-accent group-hover:text-white transition-colors duration-300">
               .
             </span>
           </p>
         </Link>
 
         {/* Desktop Nav */}
-        <ul className="list-none hidden sm:flex flex-row gap-10">
-          {navLinks.map((nav) => (
-            <li key={nav.id} className="relative group">
-              <a
-                href={`#${nav.id}`}
-                className={`${
-                  active === nav.title ? "text-white" : "text-secondary"
-                } hover:text-white text-[17px] font-medium cursor-pointer transition-colors duration-300`}
-                onClick={() => setActive(nav.title)}
-              >
-                {nav.title}
-              </a>
-              {/* Animated underline */}
-              <span
-                className={`absolute -bottom-1 left-0 h-[2px] bg-[#915EFF] transition-all duration-300 ${
-                  active === nav.title ? "w-full" : "w-0 group-hover:w-full"
-                }`}
-              />
-            </li>
-          ))}
-        </ul>
+        <div className="hidden sm:flex flex-row items-center gap-10">
+          <ul className="list-none flex flex-row gap-10">
+            {navLinks.map((nav) => (
+              <li key={nav.id} className="relative group">
+                <a
+                  href={`#${nav.id}`}
+                  className={`${
+                    active === nav.title ? "text-white" : "text-secondary"
+                  } hover:text-white text-[17px] font-medium cursor-pointer transition-colors duration-300`}
+                  onClick={() => setActive(nav.title)}
+                >
+                  {nav.title}
+                </a>
+                {/* Animated underline */}
+                <span
+                  className={`absolute -bottom-1 left-0 h-[2px] bg-accent transition-all duration-300 ${
+                    active === nav.title ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="./Devansh_Resume.pdf"
+            download="Devansh_Resume.pdf"
+            className="px-4 py-1.5 border border-accent text-accent hover:bg-accent hover:text-white rounded-xl text-[15px] font-semibold transition-all duration-300 shadow-[0_0_15px_rgb(var(--color-accent-rgb)/0.15)] hover:shadow-[0_0_20px_rgb(var(--color-accent-rgb)/0.4)]"
+          >
+            Resume
+          </a>
+        </div>
 
         {/* Mobile Nav */}
         <div className="sm:hidden flex flex-1 justify-end items-center">
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setToggle(!toggle)}
-            className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1d1836] hover:bg-[#915EFF]/20 transition-colors duration-300"
+            className="w-9 h-9 flex items-center justify-center rounded-lg bg-[#1d1836] hover:bg-accent/20 transition-colors duration-300"
           >
             <img
               src={toggle ? close : menu}
@@ -102,7 +147,7 @@ const Navbar = () => {
                 style={{
                   background: "rgba(29, 24, 54, 0.95)",
                   backdropFilter: "blur(16px)",
-                  border: "1px solid rgba(145, 94, 255, 0.2)",
+                  border: "1px solid rgb(var(--color-accent-rgb) / 0.2)",
                   boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
                 }}
               >
@@ -115,7 +160,7 @@ const Navbar = () => {
                       transition={{ delay: idx * 0.07 }}
                       className={`font-medium cursor-pointer text-[15px] px-3 py-2 rounded-lg transition-all duration-200 ${
                         active === nav.title
-                          ? "text-white bg-[#915EFF]/20"
+                          ? "text-white bg-accent/20"
                           : "text-secondary hover:text-white hover:bg-white/5"
                       }`}
                       onClick={() => {
@@ -126,6 +171,16 @@ const Navbar = () => {
                       <a href={`#${nav.id}`}>{nav.title}</a>
                     </motion.li>
                   ))}
+                  <li className="mt-2 pt-2 border-t border-white/10 flex justify-center">
+                    <a
+                      href="./Devansh_Resume.pdf"
+                      download="Devansh_Resume.pdf"
+                      className="w-full text-center px-4 py-2 border border-accent text-accent hover:bg-accent hover:text-white rounded-xl text-[14px] font-semibold transition-all duration-300"
+                      onClick={() => setToggle(false)}
+                    >
+                      Resume
+                    </a>
+                  </li>
                 </ul>
               </motion.div>
             )}

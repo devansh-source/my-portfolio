@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-accent: #915EFF;
+  --color-accent-rgb: 145 94 255;
+  --color-accent-dark: #6b3fc4;
+  --color-accent-light: #a78bfa;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -21,17 +28,22 @@
   background: #050816;
 }
 ::-webkit-scrollbar-thumb {
-  background: #915EFF;
+  background: var(--color-accent);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #6b3fc4;
+  background: var(--color-accent-dark);
 }
 
 /* Selection */
 ::selection {
-  background: rgba(145, 94, 255, 0.3);
+  background: rgb(var(--color-accent-rgb) / 0.3);
   color: #fff;
+}
+
+/* Timeline center line override */
+.vertical-timeline::before {
+  background: var(--color-accent) !important;
 }
 
 .hash-span {
@@ -46,7 +58,7 @@
 }
 
 .violet-gradient {
-  background: linear-gradient(-90deg, #804dee 0%, rgba(60, 51, 80, 0) 100%);
+  background: linear-gradient(-90deg, var(--color-accent) 0%, rgb(var(--color-accent-rgb) / 0) 100%);
 }
 
 .green-pink-gradient {
@@ -54,7 +66,7 @@
 }
 
 .purple-gradient {
-  background: linear-gradient(135deg, #915EFF 0%, #6b3fc4 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
 }
 
 /* Text gradients */

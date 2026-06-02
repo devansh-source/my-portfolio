@@ -138,9 +138,9 @@ const experiences = [
     company_name: "Dharmsinh Desai University (DDU)",
     icon: ddu,
     iconBg: "#000000ff",
-    date: "2023 – Present",
+    date: "July 2023 - May 2026",
     points: [
-      "Currently pursuing BCA with a focus on software development and database management.",
+      "Completed BCA with a focus on software development and database management.",
       "Developed projects such as Car Rental System, Bakery Management System, Movie Booking System, and Inventory Management System.",
       "Gaining practical experience in Python, Java, and MySQL.",
     ],
@@ -220,6 +220,14 @@ const projects = [
     ],
     image: car_rental,
     source_code_link: "https://github.com/",
+    role: "Lead Full-Stack Developer",
+    features: [
+      "Interactive vehicle catalog with filtering and details view",
+      "Robust Admin Panel to manage vehicles, drivers, customer records, and bills",
+      "Secure tour package booking system with auto-generated pricing logs",
+      "Responsive user interface for fluid booking experience on mobile devices",
+    ],
+    live_link: "",
   },
   {
     name: "Bakery Management System",
@@ -249,6 +257,14 @@ const projects = [
     ],
     image: bakery,
     source_code_link: "https://github.com/",
+    role: "Backend & Database Developer",
+    features: [
+      "Product discovery with intuitive add-to-cart functionality",
+      "Dynamic inventory management with automated stock deduction upon order completion",
+      "Interactive order status tracker for end-users",
+      "Structured administrative interface for menu editing, dispatch details, and sales analytics",
+    ],
+    live_link: "",
   },
   {
     name: "Movie Booking System",
@@ -274,6 +290,14 @@ const projects = [
     ],
     image: movie_project,
     source_code_link: "https://github.com/",
+    role: "Full-Stack MERN Developer",
+    features: [
+      "Real-time visual seat booking grid and reservation management",
+      "Movie search and filtering by timing, genres, and release schedules",
+      "Customer dashboard for browsing previous tickets and managing cancellations",
+      "Secure REST APIs with JWT authentication and custom middleware handlers",
+    ],
+    live_link: "",
   },
 ];
 

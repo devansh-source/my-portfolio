@@ -19,13 +19,13 @@ const ExperienceCard = ({ experience }) => {
         background: "rgba(29, 24, 54, 0.85)",
         backdropFilter: "blur(10px)",
         color: "#fff",
-        border: "1px solid rgba(145, 94, 255, 0.15)",
+        border: "1px solid rgb(var(--color-accent-rgb) / 0.15)",
         boxShadow: "0 4px 30px rgba(0, 0, 0, 0.4)",
         borderRadius: "16px",
         padding: "24px 28px",
       }}
       contentArrowStyle={{
-        borderRight: "8px solid rgba(145, 94, 255, 0.3)",
+        borderRight: "8px solid rgb(var(--color-accent-rgb) / 0.3)",
       }}
       date={
         <span className="text-secondary text-[14px] font-medium tracking-wide">
@@ -34,7 +34,7 @@ const ExperienceCard = ({ experience }) => {
       }
       iconStyle={{
         background: experience.iconBg,
-        boxShadow: "0 0 0 4px rgba(145, 94, 255, 0.3), 0 0 20px rgba(145, 94, 255, 0.2)",
+        boxShadow: "0 0 0 4px rgb(var(--color-accent-rgb) / 0.3), 0 0 20px rgb(var(--color-accent-rgb) / 0.2)",
       }}
       icon={
         <div className="flex justify-center items-center w-full h-full">
@@ -51,7 +51,7 @@ const ExperienceCard = ({ experience }) => {
           {experience.title}
         </h3>
         <p
-          className="text-[#915EFF] text-[15px] font-semibold mt-1"
+          className="text-accent text-[15px] font-semibold mt-1"
           style={{ margin: "6px 0 0 0" }}
         >
           {experience.company_name}
@@ -64,7 +64,7 @@ const ExperienceCard = ({ experience }) => {
             key={`experience-point-${index}`}
             className="text-white-100 text-[14px] leading-[24px] flex items-start gap-2"
           >
-            <span className="text-[#915EFF] mt-1 shrink-0">▸</span>
+            <span className="text-accent mt-1 shrink-0">▸</span>
             <span>{point}</span>
           </li>
         ))}
@@ -86,7 +86,7 @@ const Experience = () => {
       </motion.div>
 
       <div className="mt-20 flex flex-col">
-        <VerticalTimeline lineColor="rgba(145, 94, 255, 0.25)">
+        <VerticalTimeline lineColor="rgb(var(--color-accent-rgb) / 0.25)">
           {experiences.map((experience, index) => (
             <ExperienceCard key={`experience-${index}`} experience={experience} />
           ))}

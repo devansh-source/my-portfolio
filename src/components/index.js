@@ -8,6 +8,8 @@ import Works from "./Works";
 import Feedbacks from "./Feedbacks";
 import Contact from "./Contact";
 import CanvasLoader from "./Loader";
+import ThemeCustomizer from "./ThemeCustomizer";
+import ScrollProgress from "./ScrollProgress";
 
 
 export {
@@ -22,5 +24,7 @@ export {
   CanvasLoader,
   EarthCanvas,
   ComputersCanvas,
-  StarsCanvas
+  StarsCanvas,
+  ThemeCustomizer,
+  ScrollProgress
 };

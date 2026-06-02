@@ -57,7 +57,7 @@ const Contact = () => {
   };
 
   const inputClass =
-    "bg-[#1a1335] py-4 px-5 placeholder:text-secondary/60 text-white rounded-xl outline-none border border-white/10 focus:border-[#915EFF]/60 transition-colors duration-300 font-medium text-[15px] resize-none";
+    "bg-[#1a1335] py-4 px-5 placeholder:text-secondary/60 text-white rounded-xl outline-none border border-white/10 focus:border-accent/60 transition-colors duration-300 font-medium text-[15px] resize-none";
 
   return (
     <div className="xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden">
@@ -138,8 +138,8 @@ const Contact = () => {
             whileTap={{ scale: 0.98 }}
             className="relative w-fit py-3 px-10 rounded-xl font-bold text-white overflow-hidden transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
             style={{
-              background: "linear-gradient(135deg, #915EFF, #6b3fc4)",
-              boxShadow: "0 4px 20px rgba(145, 94, 255, 0.4)",
+              background: "linear-gradient(135deg, var(--color-accent), var(--color-accent-dark))",
+              boxShadow: "0 4px 20px rgb(var(--color-accent-rgb) / 0.4)",
             }}
           >
             {loading ? (
