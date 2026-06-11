@@ -26,14 +26,20 @@ const CertificateCard = ({ index, name, issuer, date, icon, pdf_link, skills }) 
 
   return (
     <motion.div
-      variants={fadeIn("up", "spring", index * 0.2, 0.75)}
+      variants={fadeIn("up", "tween", index * 0.15, 0.8)}
       className="w-full sm:w-[360px]"
     >
       <Tilt
-        options={{ max: 15, scale: 1.03, speed: 450 }}
+        options={{ 
+          max: 10, 
+          scale: 1.02, 
+          speed: 800, 
+          transition: true, 
+          easing: "cubic-bezier(.03,.98,.52,.99)" 
+        }}
         className="w-full h-full"
       >
-        <div className="bg-tertiary p-6 rounded-2xl w-full h-full border border-white/5 hover:border-accent/30 transition-all duration-300 hover:shadow-[0_10px_40px_rgba(145,94,255,0.15)] flex flex-col justify-between group cursor-pointer relative overflow-hidden">
+        <div className="bg-tertiary p-6 rounded-2xl w-full h-full border border-white/5 hover:border-accent/30 transition-all duration-300 hover:shadow-[0_10px_40px_rgba(145,94,255,0.15)] flex flex-col justify-between group cursor-pointer relative overflow-hidden transform-gpu will-change-transform">
           {/* Subtle top-right glow overlay */}
           <div className="absolute -right-10 -top-10 w-24 h-24 bg-accent/5 rounded-full blur-2xl group-hover:bg-accent/20 transition-all duration-300 pointer-events-none" />
 
@@ -76,7 +82,8 @@ const CertificateCard = ({ index, name, issuer, date, icon, pdf_link, skills }) 
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-[13px] font-bold text-accent hover:text-white transition-colors duration-300"
-              whileHover={{ x: 3 }}
+              whileHover={{ x: 5 }}
+              transition={{ type: "tween", ease: "easeInOut", duration: 0.2 }}
             >
               <span>View Certificate</span>
               <FaExternalLinkAlt className="w-3.5 h-3.5" />
