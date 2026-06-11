@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
@@ -31,58 +31,74 @@ const Computers = ({ isMobile }) => {
 
 const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    // Add a listener for changes to the screen size
+    // Media query listener
     const mediaQuery = window.matchMedia("(max-width: 500px)");
-
-    // Set the initial value of the `isMobile` state variable
     setIsMobile(mediaQuery.matches);
 
-    // Define a callback function to handle changes to the media query
     const handleMediaQueryChange = (event) => {
       setIsMobile(event.matches);
     };
 
-    // Add the callback function as a listener for changes to the media query
     if (mediaQuery.addEventListener) {
       mediaQuery.addEventListener("change", handleMediaQueryChange);
     } else {
       mediaQuery.addListener(handleMediaQueryChange);
     }
 
-    // Remove the listener when the component is unmounted
+    // Intersection observer to only render WebGL when visible
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
     return () => {
       if (mediaQuery.removeEventListener) {
         mediaQuery.removeEventListener("change", handleMediaQueryChange);
       } else {
         mediaQuery.removeListener(handleMediaQueryChange);
       }
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
     };
   }, []);
 
   return (
-    <Canvas
-      frameloop='always'
-      shadows
-      dpr={[1, 2]}
-      camera={{ position: [20, 3, 5], fov: 25 }}
-      gl={{ preserveDrawingBuffer: true }}
-      style={{ pointerEvents: isMobile ? "none" : "auto" }}
-    >
-      <Suspense fallback={<CanvasLoader />}>
-        <OrbitControls
-          enableZoom={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-          enableRotate={!isMobile}
-          autoRotate
-        />
-        <Computers isMobile={isMobile} />
-      </Suspense>
+    <div ref={containerRef} className="w-full h-full">
+      {isInView && (
+        <Canvas
+          frameloop='always'
+          shadows
+          dpr={[1, 1.5]}
+          camera={{ position: [20, 3, 5], fov: 25 }}
+          gl={{ preserveDrawingBuffer: true, powerPreference: "high-performance" }}
+          style={{ pointerEvents: isMobile ? "none" : "auto" }}
+        >
+          <Suspense fallback={<CanvasLoader />}>
+            <OrbitControls
+              enableZoom={false}
+              maxPolarAngle={Math.PI / 2}
+              minPolarAngle={Math.PI / 2}
+              enableRotate={!isMobile}
+              autoRotate
+            />
+            <Computers isMobile={isMobile} />
+          </Suspense>
 
-      <Preload all />
-    </Canvas>
+          <Preload all />
+        </Canvas>
+      )}
+    </div>
   );
 };
 
