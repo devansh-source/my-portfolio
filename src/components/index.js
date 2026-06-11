@@ -10,6 +10,7 @@ import Contact from "./Contact";
 import CanvasLoader from "./Loader";
 import ThemeCustomizer from "./ThemeCustomizer";
 import ScrollProgress from "./ScrollProgress";
+import Certificates from "./Certificates";
 
 
 export {
@@ -26,5 +27,6 @@ export {
   ComputersCanvas,
   StarsCanvas,
   ThemeCustomizer,
-  ScrollProgress
+  ScrollProgress,
+  Certificates
 };

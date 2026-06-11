@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 
-import { About, Contact, Experience, Hero, Navbar, Tech, Works, StarsCanvas, ThemeCustomizer, ScrollProgress } from "./components";
+import { About, Contact, Experience, Hero, Navbar, Tech, Works, StarsCanvas, ThemeCustomizer, ScrollProgress, Certificates } from "./components";
 import Footer from "./components/Footer";
 
 const App = () => {
@@ -17,6 +17,7 @@ const App = () => {
         <Experience />
         <Tech />
         <Works />
+        <Certificates />
         <div className='relative z-0'>
           <Contact />
 

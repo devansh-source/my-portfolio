@@ -47,16 +47,17 @@ import meta from "../assets/company/meta.png";
 
 
 export const navLinks = [
-
-
   {
     id: "about",
     title: "About",
-
   },
   {
     id: "work",
     title: "Work",
+  },
+  {
+    id: "certificates",
+    title: "Certificates",
   },
   {
     id: "contact",
@@ -301,4 +302,31 @@ const projects = [
   },
 ];
 
-export { services, technologies, experiences, testimonials, projects };
+const certifications = [
+  {
+    name: "Python for Data Science, AI & Development",
+    issuer: "IBM",
+    date: "2025",
+    icon: python,
+    pdf_link: "/certificates/python_data_science.pdf",
+    skills: ["Python", "Data Science", "AI & Development", "Data Structures"],
+  },
+  {
+    name: "Oracle Java Foundations",
+    issuer: "Oracle",
+    date: "2025",
+    icon: java,
+    pdf_link: "/certificates/oracle_java.pdf",
+    skills: ["Java SE", "Object-Oriented Programming", "Software Foundations"],
+  },
+  {
+    name: "Apply API Testing Fundamentals Using Postman",
+    issuer: "Postman",
+    date: "2026",
+    icon: "postman",
+    pdf_link: "/certificates/postman_api_testing.pdf",
+    skills: ["API Testing", "Postman", "REST APIs", "API Automation"],
+  },
+];
+
+export { services, technologies, experiences, testimonials, projects, certifications };
